@@ -2,6 +2,7 @@ const notes = require("express").Router();
 const path = require("path");
 const store = require("../db/store");
 
+// get notes from db.json and render
 notes.get("/", (req, res) => {
   store
     .getNotes()
@@ -11,6 +12,7 @@ notes.get("/", (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
+// post new note and save to db.json
 notes.post("/", (req, res) => {
   store
     .addNote(req.body)
@@ -18,6 +20,7 @@ notes.post("/", (req, res) => {
     .catch((err) => res.status(500).json(err));
 });
 
+// delete note based on id created from uuid
 notes.delete("/:id", (req, res) => {
   store
     .removeNote(req.params.id)
